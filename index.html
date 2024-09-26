@@ -5,16 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Silly Story Generator</title>
     <style>
-        label,input[type="text"] {
-            display: inline-block;
+        /* This ensures the label and input are on the same line */
+        label {
+            display: inline;
             margin-right: 10px;
+        }
+        input[type="text"] {
+            display: inline;
         }
     </style>
 </head>
 <body>
-   <!--<label><h3>Enter custom name:</h3></label><input type="text" id="customName">-->
-      <label for="customName"><h3>Enter custom name:</h3></label>
-      <input id="customName" type="text" placeholder="" />
+    <h1>Silly Story Generator</h1>
+
+    <label for="customName">Enter custom name:</label>
+    <input id="customName" type="text" placeholder="Enter name here" />
 
     <p>
         <input type="radio" id="us" name="region" checked>
@@ -28,72 +33,62 @@
     <p id="story" style="display: none;"></p>
 
     <script>
-      // Select the button and story elements
-const generateButton = document.getElementById('generate');
-const story = document.getElementById('story');
+        // Select the button and story elements
+        const generateButton = document.getElementById('generate');
+        const story = document.getElementById('story');
 
-// Original story text template
-const storyText = "It was 94 fahrenheit outside, so Willy the Goblin went for a walk. When they got to the soup kitchen, they stared in horror for a few moments, then turned into a slug and crawled away. Bob saw the whole thing, but was not surprised — Willy the Goblin weighs 300 pounds, and it was a hot day.";
+        // Original story text template
+        const storyText = "It was 94 fahrenheit outside, so Willy the Goblin went for a walk. When they got to the soup kitchen, they stared in horror for a few moments, then turned into a slug and crawled away. Bob saw the whole thing, but was not surprised — Willy the Goblin weighs 300 pounds, and it was a hot day.";
 
-// Random value arrays for story generation
-const characters = ['Willy the Goblin', 'Bigfoot', 'Father Christmas'];
-const actions = ['went for a walk', 'found a mysterious treasure', 'started dancing'];
-const places = ['the soup kitchen', 'a haunted forest', 'the local market'];
+        // Random value arrays for story generation
+        const characters = ['Willy the Goblin', 'Bigfoot', 'Father Christmas'];
+        const actions = ['went for a walk', 'found a mysterious treasure', 'started dancing'];
+        const places = ['the soup kitchen', 'a haunted forest', 'the local market'];
 
-// Helper function to generate a random value
-function randomValueFromArray(array) {
-    return array[Math.floor(Math.random() * array.length)];
-}
+        // Helper function to generate a random value
+        function randomValueFromArray(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
 
-// Function to convert US units to UK units
-function convertToUK(story) {
-    // Convert fahrenheit to celsius (C = (F - 32) * 5/9)
-    let temperature = (94 - 32) * 5 / 9;
-    temperature = Math.round(temperature) + ' centigrade';
+        // Function to convert US units to UK units
+        function convertToUK(story) {
+            let temperature = (94 - 32) * 5 / 9;
+            temperature = Math.round(temperature) + ' centigrade';
 
-    // Convert pounds to stones (1 stone = 14 pounds)
-    let weight = 300 / 14;
-    weight = Math.round(weight) + ' stone';
+            let weight = 300 / 14;
+            weight = Math.round(weight) + ' stone';
 
-    // Replace values in the story
-    let newStory = story.replace('94 fahrenheit', temperature);
-    newStory = newStory.replace('300 pounds', weight);
-    
-    return newStory;
-}
+            let newStory = story.replace('94 fahrenheit', temperature);
+            newStory = newStory.replace('300 pounds', weight);
+            
+            return newStory;
+        }
 
-// Function to generate the random story
-function generateStory() {
-    // Generate a new random story
-    let newStory = storyText;
+        // Function to generate the random story
+        function generateStory() {
+            let newStory = storyText;
 
-    const customName = document.getElementById('customName').value;
-    const isUK = document.getElementById('uk').checked;
+            const customName = document.getElementById('customName').value;
+            const isUK = document.getElementById('uk').checked;
 
-    // Replace Bob with custom name if provided
-    if (customName !== '') {
-        newStory = newStory.replace('Bob', customName);
-    }
+            if (customName !== '') {
+                newStory = newStory.replace('Bob', customName);
+            }
 
-    // Replace default actions and characters with random ones
-    newStory = newStory.replace('Willy the Goblin', randomValueFromArray(characters));
-    newStory = newStory.replace('went for a walk', randomValueFromArray(actions));
-    newStory = newStory.replace('the soup kitchen', randomValueFromArray(places));
+            newStory = newStory.replace('Willy the Goblin', randomValueFromArray(characters));
+            newStory = newStory.replace('went for a walk', randomValueFromArray(actions));
+            newStory = newStory.replace('the soup kitchen', randomValueFromArray(places));
 
-    // If UK is selected, convert units
-    if (isUK) {
-        newStory = convertToUK(newStory);
-    }
+            if (isUK) {
+                newStory = convertToUK(newStory);
+            }
 
-    // Display the new story
-    story.textContent = newStory;
-    story.style.display = 'block';
-    story.style.backgroundColor ='goldenrod';
-}
+            story.textContent = newStory;
+            story.style.display = 'block';
+            story.style.backgroundColor = 'goldenrod';
+        }
 
-// Event listener for the generate button
-generateButton.addEventListener('click', generateStory);
-                                 
+        generateButton.addEventListener('click', generateStory);
     </script>
 </body>
 </html>
