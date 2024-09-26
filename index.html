@@ -6,25 +6,28 @@
     <title>Silly Story Generator</title>
     <style>
         label {
-            display: inline;
-            margin-right: 10px;
+            font-weight:bold;
         }
         input[type="text"] {
-            display: inline;
+            padding: 5px;
+            width: 150px;
+        }
+        div {
+            padding-bottom: 20px;
         }
     </style>
 </head>
 <body>
-
-    <label for="customName"><h3>Enter custom name:</h3></label>
+    <div>
+    <label for="customName">Enter custom name:</label>
     <input id="customName" type="text" placeholder="Enter name here" />
-
-    <p>
+    </div>
+    <div>
+        <label for="us">US</label>
         <input type="radio" id="us" name="region" checked>
-        <b><label for="us">US</label></b>
+        <label for="uk">UK</label>
         <input type="radio" id="uk" name="region">
-        <b><label for="uk">UK</label></b>
-    </p>
+    </div>
 
     <button id="generate">Generate random story</button>
 
